@@ -1,9 +1,9 @@
-package com.msg.spock;
+package spock.code.week;
 
 
 import org.junit.Test;
 
-public class MainTest {
+public class FizzBuzzTest {
 
     @Test
     public void emptyTest() {

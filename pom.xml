@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.msg.spock</groupId>
-  <artifactId>com.msg.spock</artifactId>
+  <groupId>spock.code.week</groupId>
+  <artifactId>spock.code.week</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Spock Code Week</name>
@@ -43,7 +43,7 @@
           </includes>
         </configuration>
       </plugin>
-      <!-- Only required for spock-example build -->
+      <!-- Only required for build -->
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
         <version>2.5</version>
@@ -105,7 +105,7 @@
     </repository>
   </repositories>
 
-  <!-- Only required in spock-example build -->
+  <!-- Only required in build -->
   <distributionManagement>
     <repository>
       <id>foo</id>

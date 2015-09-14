@@ -1,5 +1,14 @@
+# idea
 .idea
+*.iml
+
+# eclipse
+.project
+.classpath
+.settings
+
+# build tool
 .gradle
 target
 build
-*.iml
+/bin/
