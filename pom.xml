@@ -43,6 +43,15 @@
           </includes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
       <!-- Only required for build -->
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
@@ -105,15 +114,4 @@
     </repository>
   </repositories>
 
-  <!-- Only required in build -->
-  <distributionManagement>
-    <repository>
-      <id>foo</id>
-      <url>file:///fake.repository.to.make.maven.happy</url>
-    </repository>
-    <snapshotRepository>
-      <id>bar</id>
-      <url>file:///fake.repository.to.make.maven.happy</url>
-    </snapshotRepository>
-  </distributionManagement>
 </project>
