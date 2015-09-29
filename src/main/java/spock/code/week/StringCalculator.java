@@ -10,6 +10,20 @@ public class StringCalculator {
 
     private static final String ILLEGAL_ARGUMENT_MESSAGE = "negatives not allowed:";
 
+    private static final int LOTTERY_NUMBER = 1234;
+    private static final String HOST = "Merkel";
+
+    Stack stack;
+    EasterEgg easterEgg;
+
+    public void setStack(Stack stack) {
+        this.stack = stack;
+    }
+
+    public void setEasterEgg(EasterEgg easterEgg) {
+        this.easterEgg = easterEgg;
+    }
+
     public int add (String numbers) {
         if(numbers.isEmpty()) {
             return 0;
@@ -17,6 +31,11 @@ public class StringCalculator {
         String[] numberParts = extractSingleNumbers(numbers);
         checkForInvalidNumbers(numberParts);
         return calculateResult(numberParts);
+    }
+
+    public int calculateNumberStringFromStack() {
+        String numbers = stack.retrieveNextElement();
+        return add(numbers);
     }
 
     private String[] extractSingleNumbers(String command) {
@@ -63,6 +82,9 @@ public class StringCalculator {
 
         for(String number : numberParts) {
             int numberToAdd = Integer.parseInt(number);
+            if (numberToAdd == LOTTERY_NUMBER) {
+                easterEgg.inviteToBBQ(HOST);
+            }
             if (numberToAdd > MAX_THRESHOLD) {
                 continue;
             }
