@@ -22,9 +22,9 @@ class StringCalculatorSpec extends Specification {
         calculator.add(input) == result
 
         where:
-        input       | result
-            "1"     |   1
-          "1,2"     |   3
+        input | result
+        "1"   | 1
+        "1,2" | 3
     }
 
     @See("Task 2")
@@ -58,5 +58,32 @@ class StringCalculatorSpec extends Specification {
     def "Numbers greater than 1000 are ignored"() {
         expect:
         calculator.add("2,1001") == 2
+    }
+
+    @See("Task 7")
+    def "The calculator string is retrieved by the Stack, the result is calculated as well"() {
+        given: "A stub of the stack"
+        Stack stack = Stub(Stack)
+        stack.retrieveNextElement() >> "1,2,3,4"
+        and: "the calculator with the stubbed stack"
+        calculator.setStack(stack)
+        expect: "The sum of the numbers of the string in the stack"
+        calculator.calculateNumberStringFromStack() == 10
+    }
+
+    @See("Task 8")
+    def "The easteregg method is called in case 1234 is contained in the string"() {
+        given: "A mock of the easter egg"
+        EasterEgg easterEgg = Mock(EasterEgg)
+        and: "A calculator with the easter egg"
+        calculator.setEasterEgg(easterEgg)
+        when: "The calculator is started with 6666"
+        calculator.add("1,4,6666")
+        then: "The easterEgg method is called"
+        0 * easterEgg.callEasterEgg()
+        when: "The calculator is started with 1234"
+        calculator.add("1,4,1234")
+        then: "The easterEgg method is called"
+        1 * easterEgg.callEasterEgg()
     }
 }
