@@ -77,6 +77,10 @@ class StringCalculatorSpec extends Specification {
             EasterEgg easterEgg = Mock(EasterEgg)
         and: "A calculator with the easter egg"
             calculator.setEasterEgg(easterEgg)
+        when: "The calculator is started with 1233"
+        calculator.add("1,4,1233")
+        then: "The easterEgg method isn't called"
+        0 * easterEgg.inviteToBBQ(_)
         when: "The calculator is started with 1234"
             calculator.add("1,4,1234")
         then: "The easterEgg method is called"
