@@ -1,25 +1,23 @@
 package spock.code.week
 
-import spock.lang.Narrative
-import spock.lang.Specification
-import spock.lang.Title
-import spock.lang.Unroll
+import spock.lang.*
 
 @Title("Fizz Buzz Kata")
 @Narrative("""
 A Specification for the Fizz Buzz Kata
-that can be found """)
+within the scope of the code week workshop """)
 class FizzBuzzSpec extends Specification {
 
     public static final String FIZZ = "Fizz"
     public static final String BUZZ = "Buzz"
     public static final String FIZZ_BUZZ = "FizzBuzz"
 
-    @Unroll
-    def "If number #param is given than #expected is returned"() {
-        given:
-        def fizzBuzz = new FizzBuzz()
+    @Shared
+    def fizzBuzz = new FizzBuzz()
 
+    @Unroll
+    @See("Basic Kata")
+    def "If number #param is given than #expected is returned"() {
         expect:
         expected == fizzBuzz.play(param)
 
@@ -37,6 +35,15 @@ class FizzBuzzSpec extends Specification {
         10    || BUZZ
         15    || FIZZ_BUZZ
         20    || BUZZ
+    }
+
+    @See("Extension to check for exceptions")
+    def "Fizz Buzz throws an exception when called with numbers smaller than 1"() {
+        when: "The play method is called with 0"
+        fizzBuzz.play(0)
+        then: "An IllegalArgumentException is thrown"
+        IllegalArgumentException e = thrown()
+        e.message == "number must be greater than 0"
     }
 
 }
