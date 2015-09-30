@@ -11,9 +11,10 @@ class FizzBuzzSpec extends Specification {
     public static final String FIZZ = "Fizz"
     public static final String BUZZ = "Buzz"
     public static final String FIZZ_BUZZ = "FizzBuzz"
+    public static final String WHIZZ = "Whizz"
 
-    @Shared
-    def fizzBuzz = new FizzBuzz()
+    @Subject
+    FizzBuzz fizzBuzz = new FizzBuzz()
 
     @Unroll
     @See("Basic Kata")
@@ -46,4 +47,41 @@ class FizzBuzzSpec extends Specification {
         e.message == "number must be greater than 0"
     }
 
+    @Unroll
+    @See("An example using a stub")
+    def "In advanced mode the number is specified (#stubResult results to #fizzBuzzResult)"() {
+        given: "A stub of the number selector"
+        NumberSelector selector = Stub(NumberSelector)
+        selector.presetNumber() >> stubResult
+        and: "A FizzBuzz with the stubbed selector"
+        fizzBuzz.selector = selector
+        expect: "The correct result"
+        fizzBuzz.playAdvanced() == fizzBuzzResult
+        where:
+        stubResult || fizzBuzzResult
+        3          || FIZZ
+        5          || BUZZ
+        15         || FIZZ_BUZZ
+        19         || "19"
+    }
+
+    @See("An example using a mock")
+    def "For a number that can be devided by 7, the sayWhizz method is called"() {
+        given: "A Mock of a Whizz"
+        Whizz whizz = Mock(Whizz)
+        and: "A FizzBuzz with the Whizz"
+        fizzBuzz.whizz = whizz
+
+        when: "The number that can't be divided by 7"
+        def result = fizzBuzz.play(6)
+        then: "The mock isn't called"
+        0 * whizz.sayWhizz()
+        result == FIZZ
+
+        when: "The number that can be divided by 7"
+        result = fizzBuzz.play(7)
+        then: "The mock is called"
+        1 * whizz.sayWhizz() >> WHIZZ
+        result == WHIZZ
+    }
 }
