@@ -7,15 +7,17 @@ class FizzBuzzSpec extends Specification {
 
 
     public static final String FIZZ = "Fizz"
+    public static final String BUZZ = "Buzz"
+    public static final String FIZZ_BUZZ = "FizzBuzz"
 
     @Unroll
     def "If number #param is given than #expected is returned"() {
 
         when:
-        def calculator = new FizzBuzz()
+        def fizzBuzz = new FizzBuzz()
 
         then:
-        expected == calculator.calculate(param)
+        expected == fizzBuzz.play(param)
 
         where:
         param || expected
@@ -23,10 +25,14 @@ class FizzBuzzSpec extends Specification {
         2     || "2"
         3     || FIZZ
         4     || "4"
-        5     || "Buzz"
+        5     || BUZZ
         6     || FIZZ
         7     || "7"
         8     || "8"
+        9     || FIZZ
+        10    || BUZZ
+        15    || FIZZ_BUZZ
+        20    || BUZZ
     }
 
 }
